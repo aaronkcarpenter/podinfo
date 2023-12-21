@@ -3,3 +3,42 @@ service:
   identifier: test
   orgIdentifier: December_2023
   projectIdentifier: aaron_carpenter
+  serviceDefinition:
+    spec:
+      manifests:
+        - manifest:
+            identifier: ServiceManifest1
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: aaron_carpenter_gh_connector
+                  gitFetchType: Branch
+                  paths:
+                    - ./podinfo/charts/podinfo
+                  repoName: podinfo
+                  branch: master
+              valuesPaths:
+                - .podinfo/charts/podinfo/values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+        - manifest:
+            identifier: Prod
+            type: Values
+            spec:
+              store:
+                type: Harness
+                spec:
+                  files:
+                    - /acarpenter/prod-values.yaml
+        - manifest:
+            identifier: Dev
+            type: Values
+            spec:
+              store:
+                type: Harness
+                spec:
+                  files:
+                    - /acarpenter/dev-values.yaml
+    type: Kubernetes
