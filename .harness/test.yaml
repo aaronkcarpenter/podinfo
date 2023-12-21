@@ -23,22 +23,4 @@ service:
                 - .podinfo/charts/podinfo/values.yaml
               skipResourceVersioning: false
               enableDeclarativeRollback: false
-        - manifest:
-            identifier: Prod
-            type: Values
-            spec:
-              store:
-                type: Harness
-                spec:
-                  files:
-                    - /acarpenter/prod-values.yaml
-        - manifest:
-            identifier: Dev
-            type: Values
-            spec:
-              store:
-                type: Harness
-                spec:
-                  files:
-                    - /acarpenter/dev-values.yaml
     type: Kubernetes
